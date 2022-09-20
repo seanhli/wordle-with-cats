@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+  <title>Wordle history</title>
+{% endblock page_name %}
+
+{% block content %}
+  <main>
+    <div class="pagination padded">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="unstyle-link">&#x25C0 &nbsp</a>
+      {% endif %}
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="unstyle-link">&nbsp &#x25B6</a>
+      {% endif %}
+    </div>
+    <div class="main-page-gallery">
+      {% for item in wordlehistory_list %}
+          <div>
+            {{item}}
+          </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+  <title>New game</title>
+{% endblock page_name %}
+
+{% block content %}
+  <main>
+    <form method="post" class="form-text" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+          <button class="button">Start new game</button>
+        </div>
+    </form>
+  </main>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+  <title>Wordle</title>
+{% endblock page_name %}
+
+{% block content %}
+  <main>
+    <form method="POST" autocomplete="OFF">
+        {% csrf_token %}
+        <input name="word_guess" type="text">
+        <button>Guess</button>
+    </form>
+    {{attempts}}
+    {% for guess in tried %}
+        <div>
+            {% for letter in guess %}
+                <span class="letter-card" style="background-color: {{colors}};">{{letter}}</span>
+            {% endfor %}
+        </div>
+    {% endfor %}
+  </main>
+{% endblock content %}

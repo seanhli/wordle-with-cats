@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block page_name %}
+  {% endblock page_name %}
+  <link rel="stylesheet" href="{% static 'css/cat.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+    <div class="banner">
+        <!--Adjust banner-->
+        <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1021875350529130629/Longcat.webp">
+    </div>
+    <header class="cd-header">
+        <div class="header-wrapper">
+            <div class="nav-but-wrap">
+                <div class="menu-icon hover-target">
+                    <span class="menu-icon__line menu-icon__line-left"></span>
+                    <span class="menu-icon__line"></span>
+                    <span class="menu-icon__line menu-icon__line-right"></span>
+                </div>
+                <div class="menu-text">
+                    Menu
+                </div>
+            </div>
+        </div>
+        <div class="switch-wrap">
+            <div id="switch" class="hover-target">
+                <div id="circle"></div>
+            </div>
+            <div>
+                <div class="switch-text-dark">
+                dark
+                </div>
+                <div class="switch-text-light">
+                    light
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="header-backdrop">
+    </div>
+    <div class="nav">
+        <div class="nav__content">
+            <ul class="nav__list">
+                <!-- change active nav to current page by changing class="nav_list-item active-nav"-->
+                <li class="nav__list-item"><a href="{% url 'home' %}" class="hover-target">Home</a></li>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li class="nav__list-item"><a href="{% url 'admin:index' %}" class="hover-target">Admin</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer>
+        <a href="{% url 'home' %}" class="link-to-page" target=”_blank”></a>
+    </footer>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>
