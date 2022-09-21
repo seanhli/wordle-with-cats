@@ -158,8 +158,10 @@ body {
   transition: border-radius linear 0.8s, width cubic-bezier(0.77, 0, 0.175, 1) 0.6s, height cubic-bezier(0.77, 0, 0.175, 1) 0.6s;
 }
 
+/* ADJUST MENU BOX COLOR */
+
 .nav:after {
-  background-color: rgb(34, 34, 34);
+  background-color: rgb(170, 150, 83);
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
   box-shadow: 6px 7px 28px 0 rgba(16, 16, 16, 0.3);
@@ -743,6 +745,28 @@ button.button:active {
 
 body.light .letter-card {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.avail-letter-list {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  max-width: 50%;
+  padding: 5px;
+}
+
+.avail-letter-card {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgb(255, 255, 255);
+  text-align: center;
+  line-height: 24px;
+  margin: 3px 1px 3px 1px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0px 4px 8px 0px rgba(255, 255, 255, 0.4);
 }
 
 /* ================================

@@ -20,6 +20,19 @@
                 <input name="word_guess" type="text" autofocus>
                 <button>Guess</button>
             </form>
+            {% if error_message|length > 0 %}
+                {{error_message}}
+            {% endif %}
+        <div class="avail-letter-list">
+            <div>
+                Unused letters
+            </div>
+            {% for letter in available_letters %}
+                <div class="avail-letter-card">
+                    {{letter}}
+                </div>
+            {% endfor %}
+        </div>
         {% else %}
             <p>Congrats!</p>
             <div class="container">
@@ -171,9 +184,6 @@
                     </div>
                 </div>
             </div>
-        {% endif %}
-        {% if error_message|length > 0 %}
-            {{error_message}}
         {% endif %}
     </main>
 {% endblock content %}

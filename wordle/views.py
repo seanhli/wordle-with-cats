@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from wordle.word_generator import word_generator
 from wordle.models import WordleHistory
+import string
 
 # Create your views here.
 class WordleHistoryList(ListView):
@@ -26,6 +27,7 @@ class GameBoard(DetailView):
     attempts = 0
     error_message = ""
     current_board = []
+    available_letters = list(string.ascii_uppercase)
 
     def post(self, request, **kwargs):
         user_guess = request.POST.get("word_guess").upper()
@@ -46,6 +48,9 @@ class GameBoard(DetailView):
             self.error_message = "Invalid word. Please try again"
         else:
             self.tried.append(gen.check_answer(user_guess,self.object.word.upper()))
+            for letter in user_guess:
+                if letter in self.available_letters:
+                    self.available_letters.remove(letter)
         self.attempts = len(self.tried)
 
         if not self.current_board:
@@ -76,6 +81,7 @@ class GameBoard(DetailView):
                 board[i].append("")
         context["tried"] = board
 
+        context["available_letters"] = self.available_letters
         context["error_message"] = self.error_message
         print(context)
         return context
