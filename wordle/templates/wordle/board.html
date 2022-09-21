@@ -6,18 +6,20 @@
 
 {% block content %}
   <main>
+    {% for guess in tried %}
+        <div class="letter-list">
+            {% for letter in guess %}
+                <div class="letter-card" style="background-color: {{colors}};">{{letter}}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
     <form method="POST" autocomplete="OFF">
         {% csrf_token %}
         <input name="word_guess" type="text">
         <button>Guess</button>
     </form>
-    {{attempts}}
-    {% for guess in tried %}
-        <div>
-            {% for letter in guess %}
-                <span class="letter-card" style="background-color: {{colors}};">{{letter}}</span>
-            {% endfor %}
-        </div>
-    {% endfor %}
+    {% if error_message|length > 0 %}
+        {{error_message}}
+    {% endif %}
   </main>
 {% endblock content %}

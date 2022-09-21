@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from wordle.word_generator import word_generator
 from wordle.models import WordleHistory
@@ -16,22 +16,42 @@ class GameBoard(DetailView):
     model = WordleHistory
     template_name = "wordle/board.html"
     tried = []
-    colors = "yellow"
+    colors = "white"
     attempts = 0
+    error_message = ""
 
     def post(self, request, **kwargs):
-        self.tried.append(list(request.POST.get("word_guess")))
-        self.attempts = len(self.tried)
+        user_guess = request.POST.get("word_guess").upper()
         self.object = self.get_object()
+        gen = word_generator()
+        if len(user_guess) != self.object.length:
+            self.error_message = "Invalid length. Please try again"
+        elif not gen.check_word(user_guess):
+            self.error_message = "Invalid word. Please try again"
+        else:
+            self.tried.append(list(user_guess))
+        self.attempts = len(self.tried)
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        self.object = self.get_object()
         context["attempts"] = self.attempts
-        context["tried"] = self.tried
+
+        if self.attempts == 0:
+            self.tried = []
+
+        board = self.tried.copy()
+        for i in range(self.attempts,self.object.tries,1):
+            board.append([])
+            for k in range(self.object.length):
+                board[i].append("")
+        context["tried"] = board
+
         context["colors"] = self.colors
+        context["error_message"] = self.error_message
         print(context)
         return context
 
