@@ -146,18 +146,15 @@ body {
 .nav:after {
   content: "";
   position: fixed;
-  top: 20px;
-  left: 20px;
   width: 0;
   height: 0;
   background-color: rgba(20, 21, 26, 0.6);
-  border-bottom-right-radius: 200%;
   z-index: -1;
   transition: border-radius linear 0.8s, width cubic-bezier(0.77, 0, 0.175, 1) 0.6s, height cubic-bezier(0.77, 0, 0.175, 1) 0.6s;
 }
 
 .nav:after {
-  background-color: rgb(122, 114, 97);
+  background-color: rgb(34, 34, 34);
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
   box-shadow: 6px 7px 28px 0 rgba(16, 16, 16, 0.3);
@@ -172,10 +169,15 @@ body {
   position: fixed;
   visibility: hidden;
   top: 90px;
-  left: 20px;
   width: 235px;
   text-align: left;
 }
+
+.nav__cat {
+  z-index: -10;
+  left: -400px;
+}
+
 
 .nav__list {
   position: relative;
@@ -210,7 +212,7 @@ body {
 .nav__list-item a {
   position: relative;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.842);
   overflow: hidden;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
@@ -295,8 +297,7 @@ body.nav-active .nav {
 body.nav-active .nav:before,
 body.nav-active .nav:after {
   width: 250px;
-  height: 540px;
-  border-radius: 15px;
+  height: 100%;
 }
 
 body.nav-active .nav:after {
@@ -307,6 +308,11 @@ body.nav-active .nav:after {
 body.nav-active .nav:before {
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
+}
+
+body.nav-active .nav__cat {
+  transform: translateX(477px) rotate(-30deg);
+  transition: -webkit-transform 2.2s ease;
 }
 
 body.nav-active .nav__list-item {
@@ -493,7 +499,7 @@ body.light .nav:before {
 }
 
 body.light .nav:after {
-  background-color: rgb(167, 194, 170);
+  background-color: rgb(173, 196, 160);
   box-shadow: 6px 6px 22px rgba(42, 31, 63, 0.1);
 }
 
@@ -533,12 +539,33 @@ body.light .switch-wrap p span:nth-child(1):before {
 }
 
 body.light .link-to-page {
-  background-color: rgba(32, 82, 17, 0.4);
+  background-color: rgba(173, 196, 160, 0.8);
 }
 
-body.light .banner img {
+body.light .nav__cat {
   -webkit-filter: grayscale(1) invert(1);
   filter: grayscale(1) invert(1);
+}
+
+.swing__cat {
+  -webkit-filter: grayscale(0.3);
+  filter: grayscale(0.3);
+  transform: scale(2.0);
+  top: 0%;
+
+  animation: shrinking 20.0s infinite ease;
+}
+
+@keyframes shrinking {
+  0% { transform: scale(1.5) translateY(-550px) }
+  30% { transform: scale(1.5) translateY(100px) }
+  100% { transform: scale(1.5) translateY(-550px) }
+}
+
+
+body.light .swing__cat {
+  -webkit-filter: grayscale(0.5) invert(0.8);
+  filter: grayscale(0.5) invert(0.8);
 }
 
 /* #Banner and Footer
@@ -555,7 +582,7 @@ body.light .banner img {
   border-radius: 3px;
   background-position: center center;
   background-size: 80%;
-  background-color: rgba(163, 133, 91, 0.4);
+  background-color: rgba(240, 224, 156, 0.753);
   background-repeat: no-repeat;
   background-image: url('https://cdn.discordapp.com/attachments/1021875289644613705/1021875350529130629/Longcat.webp');
   box-shadow: 0 0 0 2px rgba(255, 255, 255, .1);
