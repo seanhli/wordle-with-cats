@@ -9,13 +9,13 @@
     {% for guess in tried %}
         <div class="letter-list">
             {% for letter in guess %}
-                <div class="letter-card" style="background-color: {{colors}};">{{letter}}</div>
+                <div class="letter-card" style="background-color: {{letter.1}};">{{letter.0}}</div>
             {% endfor %}
         </div>
     {% endfor %}
     <form method="POST" autocomplete="OFF">
         {% csrf_token %}
-        <input name="word_guess" type="text">
+        <input name="word_guess" type="text" autofocus>
         <button>Guess</button>
     </form>
     {% if error_message|length > 0 %}

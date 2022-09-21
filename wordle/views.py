@@ -16,21 +16,26 @@ class GameBoard(DetailView):
     model = WordleHistory
     template_name = "wordle/board.html"
     tried = []
-    colors = "white"
     attempts = 0
     error_message = ""
+    current_board = 0
 
     def post(self, request, **kwargs):
         user_guess = request.POST.get("word_guess").upper()
         self.object = self.get_object()
         gen = word_generator()
+
+        if self.attempts == 0 or self.current_board != self.object.id:
+            self.tried = []
+
         if len(user_guess) != self.object.length:
             self.error_message = "Invalid length. Please try again"
         elif not gen.check_word(user_guess):
             self.error_message = "Invalid word. Please try again"
         else:
-            self.tried.append(list(user_guess))
+            self.tried.append(gen.check_answer(user_guess,self.object.word.upper()))
         self.attempts = len(self.tried)
+        self.current_board = self.object.id
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
@@ -40,7 +45,7 @@ class GameBoard(DetailView):
         self.object = self.get_object()
         context["attempts"] = self.attempts
 
-        if self.attempts == 0:
+        if self.attempts == 0 or self.current_board != self.object.id:
             self.tried = []
 
         board = self.tried.copy()
@@ -50,7 +55,6 @@ class GameBoard(DetailView):
                 board[i].append("")
         context["tried"] = board
 
-        context["colors"] = self.colors
         context["error_message"] = self.error_message
         print(context)
         return context

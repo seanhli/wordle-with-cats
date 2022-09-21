@@ -21,6 +21,18 @@ class word_generator:
         else:
             return False
 
+    def check_answer(self, guess: str, answer: str):
+        output = []
+        for i in range(len(answer)):
+            if guess[i] == answer[i]:
+                output.append((guess[i],"rgb(65, 126, 52)"))
+            elif guess[i] in answer:
+                output.append((guess[i],"rgb(190, 163, 42)"))
+            else:
+                output.append((guess[i],"rgb(150, 150, 150)"))
+        return output
+
+
     # Call MIT library to get a list of words
 
     def generate_dictionary(self):

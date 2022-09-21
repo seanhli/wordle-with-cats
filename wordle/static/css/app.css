@@ -557,7 +557,7 @@ body.light .banner img {
   background-size: 80%;
   background-color: rgba(163, 133, 91, 0.4);
   background-repeat: no-repeat;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/6774/6774898.png');
+  background-image: url('https://cdn.discordapp.com/attachments/1021875289644613705/1021875350529130629/Longcat.webp');
   box-shadow: 0 0 0 2px rgba(255, 255, 255, .1);
   transition: opacity .2s, border-radius .2s, box-shadow .2s;
   transition-timing-function: ease-out;
@@ -586,7 +586,7 @@ main {
 
 .banner img {
   display: block;
-  transform: scale(0.5);
+  transform: scale(0.45) rotate(0deg);
   min-width: 300px;
   max-width: 300px;
   grid-column-start: 2;
@@ -669,14 +669,18 @@ button.button:active {
 
 .letter-card {
   display: inline-block;
-  color: black;
+  color: rgb(255, 255, 255);
   width: 60px;
   height: 60px;
-  border: 2px solid #fff;
+  border: 1px solid rgb(255, 255, 255);
   text-align: center;
   line-height: 60px;
   margin: 3px 1px 3px 1px;
   font-size: 20px;
   font-weight: 600;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 4px 8px 0px rgba(255, 255, 255, 0.4);
+}
+
+body.light .letter-card {
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
 }
