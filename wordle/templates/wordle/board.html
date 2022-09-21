@@ -1,25 +1,157 @@
 {% extends 'base.html' %}
 
 {% block page_name %}
-  <title>Wordle</title>
+    <title>Wordle</title>
 {% endblock page_name %}
 
 {% block content %}
-  <main>
-    {% for guess in tried %}
-        <div class="letter-list">
-            {% for letter in guess %}
-                <div class="letter-card" style="background-color: {{letter.1}};">{{letter.0}}</div>
-            {% endfor %}
-        </div>
-    {% endfor %}
-    <form method="POST" autocomplete="OFF">
-        {% csrf_token %}
-        <input name="word_guess" type="text" autofocus>
-        <button>Guess</button>
-    </form>
-    {% if error_message|length > 0 %}
-        {{error_message}}
-    {% endif %}
-  </main>
+    <main>
+        {{wordlehistory.difficulty}}
+        {% for guess in tried %}
+            <div class="letter-list">
+                {% for letter in guess %}
+                    <div class="letter-card" style="background-color: {{letter.1}};">{{letter.0}}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% if not wordlehistory.cleared %}
+            <form method="POST" autocomplete="OFF">
+                {% csrf_token %}
+                <input name="word_guess" type="text" autofocus>
+                <button>Guess</button>
+            </form>
+        {% else %}
+            <p>Congrats!</p>
+            <div class="cat-location">
+                <div class="all-wrap">
+                    <div class="all">
+                        <div class="yarn"></div>
+                        <div class="cat-wrap">
+                            <div class="cat">
+                                <div class="cat-upper">
+                                    <div class="cat-leg"></div>
+                                    <div class="cat-leg"></div>
+                                    <div class="cat-head">
+                                        <div class="cat-ears">
+                                            <div class="cat-ear"></div>
+                                            <div class="cat-ear"></div>
+                                        </div>
+                                        <div class="cat-face">
+                                            <div class="cat-eyes"></div>
+                                            <div class="cat-mouth"></div>
+                                            <div class="cat-whiskers"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cat-lower-wrap">
+                                    <div class="cat-lower">
+                                        <div class="cat-leg">
+                                            <div class="cat-leg">
+                                                <div class="cat-leg">
+                                                    <div class="cat-leg">
+                                                        <div class="cat-leg">
+                                                            <div class="cat-leg">
+                                                                <div class="cat-leg">
+                                                                    <div class="cat-leg">
+                                                                        <div class="cat-leg">
+                                                                            <div class="cat-leg">
+                                                                                <div class="cat-leg">
+                                                                                    <div class="cat-leg">
+                                                                                        <div class="cat-leg">
+                                                                                            <div class="cat-leg">
+                                                                                                <div class="cat-leg">
+                                                                                                    <div class="cat-leg">
+                                                                                                        <div class="cat-paw"></div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cat-leg">
+                                            <div class="cat-leg">
+                                                <div class="cat-leg">
+                                                    <div class="cat-leg">
+                                                        <div class="cat-leg">
+                                                            <div class="cat-leg">
+                                                                <div class="cat-leg">
+                                                                    <div class="cat-leg">
+                                                                        <div class="cat-leg">
+                                                                            <div class="cat-leg">
+                                                                                <div class="cat-leg">
+                                                                                    <div class="cat-leg">
+                                                                                        <div class="cat-leg">
+                                                                                            <div class="cat-leg">
+                                                                                                <div class="cat-leg">
+                                                                                                    <div class="cat-leg">
+                                                                                                        <div class="cat-paw"></div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cat-tail">
+                                            <div class="cat-tail">
+                                                <div class="cat-tail">
+                                                    <div class="cat-tail">
+                                                        <div class="cat-tail">
+                                                            <div class="cat-tail">
+                                                                <div class="cat-tail">
+                                                                    <div class="cat-tail">
+                                                                        <div class="cat-tail">
+                                                                            <div class="cat-tail">
+                                                                                <div class="cat-tail">
+                                                                                    <div class="cat-tail">
+                                                                                        <div class="cat-tail">
+                                                                                            <div class="cat-tail">
+                                                                                                <div class="cat-tail">
+                                                                                                    <div class="cat-tail -end"></div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if error_message|length > 0 %}
+            {{error_message}}
+        {% endif %}
+    </main>
 {% endblock content %}

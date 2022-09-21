@@ -590,6 +590,8 @@ main {
   min-width: 300px;
   max-width: 300px;
   grid-column-start: 2;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 .form-text {
