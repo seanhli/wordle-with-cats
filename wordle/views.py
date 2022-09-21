@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 from wordle.word_generator import word_generator
 from wordle.models import WordleHistory
 
@@ -12,6 +14,9 @@ class WordleHistoryList(ListView):
     template_name = "wordle/history.html"
 
     def get_queryset(self):
+        users = get_user_model()
+        if self.request.user not in users.objects.all():
+            return None
         return WordleHistory.objects.order_by("-attempted_at").filter(player=self.request.user)
 
 class GameBoard(DetailView):
@@ -48,7 +53,8 @@ class GameBoard(DetailView):
 
         if user_guess == self.object.word.upper():
             self.object.cleared = True
-            self.object.guesses_needed = self.attempts
+            if self.object.guesses_needed == 0:
+                self.object.guesses_needed = self.attempts
             self.object.save()
 
         context = self.get_context_data(**kwargs)
@@ -81,7 +87,11 @@ class WordleCreateView(CreateView):
     fields = ["length","tries","duplicates"]
 
     def form_valid(self, form):
-        form.instance.player = self.request.user
+        users = get_user_model()
+        if self.request.user not in users.objects.all():
+            form.instance.player = None
+        else:
+            form.instance.player = self.request.user
         form.instance.guesses_needed = 0
 
         cl = (form.instance.length**0.5)*25

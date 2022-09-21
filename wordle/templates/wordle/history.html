@@ -6,21 +6,26 @@
 
 {% block content %}
   <main>
-    <div class="pagination padded">
-      {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="unstyle-link">&#x25C0 &nbsp</a>
-      {% endif %}
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="unstyle-link">&nbsp &#x25B6</a>
-      {% endif %}
-    </div>
     <div class="main-page-gallery">
-      {% for item in wordlehistory_list %}
-          <div>
-            {{item}}{{item.cleared}}---{{item.difficulty}}
-          </div>
-      {% endfor %}
+      {% if not user.is_authenticated %}
+        <p>Log in or register a new account to track your wordle history!</p>
+      {% endif %}
+      {% if user.is_authenticated %}
+        <div class="pagination padded">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="unstyle-link">&#x25C0 &nbsp</a>
+          {% endif %}
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="unstyle-link">&nbsp &#x25B6</a>
+          {% endif %}
+        </div>
+        {% for item in wordlehistory_list %}
+            <div>
+              {{item}}{{item.cleared}}---{{item.difficulty}}
+            </div>
+        {% endfor %}
+      {% endif %}
     </div>
   </main>
 {% endblock content %}

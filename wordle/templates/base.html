@@ -44,10 +44,15 @@
             <ul class="nav__list">
                 <!-- change active nav to current page by changing class="nav_list-item active-nav"-->
                 <li class="nav__list-item"><a href="{% url 'home' %}" class="hover-target">Home</a></li>
+                <li class="nav__list-item"><a href="{% url 'wordle_history' %}" class="hover-target">Wordle</a></li>
                 {% if user.is_authenticated %}
                     {% if user.is_staff %}
                         <li class="nav__list-item"><a href="{% url 'admin:index' %}" class="hover-target">Admin</a></li>
                     {% endif %}
+                    <li class="nav__list-item"><a href="{% url 'logout' %}" class="hover-target">Log out</a></li>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                    <li class="nav__list-item"><a href="{% url 'login' %}" class="hover-target">Log in</a></li>
                 {% endif %}
             </ul>
         </div>
