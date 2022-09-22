@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
+/* Generic gold
+rgb(179, 149, 18)
+
+Generic light green
+rgb(173, 196, 160)
+*/
+
 /* ================================
   TAG SELECTOR ADJUSTMENTS
 ================================ */
@@ -627,51 +634,89 @@ main {
   right: 140px;
 }
 
-.banner {
-  position: fixed;
-  z-index: 50;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 10fr 1fr 10fr;
+.generic-bold-message {
+  color: #fff;
+  text-shadow: 0 0 5px rgb(199, 134, 37);
+  font-size: 24px;
+  font-weight: 600;
 }
 
-.banner img {
-  display: block;
-  transform: scale(0.45) rotate(0deg);
-  min-width: 300px;
-  max-width: 300px;
-  grid-column-start: 2;
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
+body.light .generic-bold-message {
+  color: #000;
+  text-shadow: 0 0 5px rgb(173, 196, 160);
 }
+
 
 /* ================================
   FORMS AND BUTTONS AND STUFF
 ================================ */
 
-.form-text {
-  color: #fff;
+.form-container {
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
-.form-text input,
-.form-text textarea {
+.form-text {
+  color: #fff;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.form-container .form-text input[type='text'] {
+  width: 250px;
+  padding: 4px;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.form-text input[type='number'] {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
   border: 2px solid rgb(199, 134, 37);
   border-radius: 4px;
   padding: 1em 1.5em;
-  width: 500px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  width: 60px;
   display: block;
 }
 
-.form-text option {
-  padding: 4px;
-  width: 448px;
+.form-text input[type='checkbox'] {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-text input[type='checkbox']:before {
+  content: "";
   display: block;
-  font-weight: 600;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgb(199, 134, 37);
+  border-radius: 4px;
+  background-color: white;
+}
+
+.form-text input[type='checkbox']:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: 2px solid rgb(199, 134, 37);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
 }
 
 .form-text input:focus,
 textarea:focus {
-  box-shadow: 4px 4px 4px 4px rgba(199, 134, 37, 0.4);
+  box-shadow: 2px 2px 2px 0px rgba(199, 134, 37, 0.4);
   background: rgb(238, 230, 215);
 }
 
@@ -682,7 +727,7 @@ body.light .form-text textarea {
 
 body.light .form-text input:focus,
 body.light .form-text textarea:focus {
-  box-shadow: 4px 4px 4px 4px rgba(101, 156, 11, 0.4);
+  box-shadow: 2px 2px 2px 0px rgba(101, 156, 11, 0.4);
   background: rgb(223, 238, 215);
 }
 
@@ -720,9 +765,108 @@ button.button:active {
   background-color: lightgrey;
 }
 
+.new-game-button {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  z-index: 20;
+}
+
+.new-game-button:hover {
+  animation: slide 3.0s infinite ease;
+}
+
+@keyframes slide {
+  50% { transform: translateX(10px) }
+}
+/* ================================
+  WORDLE HISTORY LIST
+================================ */
+
+.greeting {
+  color: #fff;
+}
+
+body.light .greeting {
+  color: #000;
+}
+
+.history-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  gap: 1.5em;
+}
+
+.gallery-card {
+  display: grid;
+  grid-template-columns: 20px 4fr 6fr;
+  color: #fff;
+  height: 65px;
+  background-color: rgba(141, 131, 88, 0.8);
+  background-image: url("https://www.transparenttextures.com/patterns/notebook.png");
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+
+body.light .gallery-card {
+  color: #000;
+  background-color: rgb(173, 196, 160, 0.7);
+  background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+}
+
+.difficulty-bar {
+  grid-column-start: 1;
+  position: absolute;
+  height: 100%;
+  width: 10px;
+  left: 0;
+  margin-right: 5px;
+}
+
+.info {
+  grid-column-start: 2;
+  padding: 5px;
+  font-weight: 500;
+}
+
+.difficulty {
+  font-weight: 300;
+}
+
+.clear-status {
+  grid-column-start: 3;
+  padding: 5px;
+  font-weight: 500;
+}
+
+.clear-status-grid {
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+}
+
+.clear-status-grid img {
+  grid-column-start: 2;
+  padding-top: 10px;
+  transform: scale(0.7);
+  filter: hue-rotate(-50deg) brightness(150%);
+}
+
+body.light .clear-status-grid img {
+  filter: hue-rotate(0deg) brightness(110%);
+}
+
+.clear-status-grid .desc {
+  grid-column-start: 1;
+  margin-right: 8px;
+  text-align: right;
+}
+
 /* ================================
   WORDLE BOARD
 ================================ */
+
+.game-board {
+  width: 630px;
+  margin: auto;
+}
 
 .letter-list {
   height: 70px;
@@ -748,15 +892,20 @@ body.light .letter-card {
 }
 
 .avail-letter-list {
-  background-color: rgb(255, 255, 255);
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
-  max-width: 50%;
-  padding: 5px;
+  max-width: 317px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .avail-letter-card {
   display: inline-block;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(248, 227, 134, 0.6);
   color: rgb(0, 0, 0);
   width: 24px;
   height: 24px;
@@ -764,9 +913,13 @@ body.light .letter-card {
   text-align: center;
   line-height: 24px;
   margin: 3px 1px 3px 1px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 300;
   box-shadow: 0px 4px 8px 0px rgba(255, 255, 255, 0.4);
+}
+
+body.light .avail-letter-card {
+  background-color: rgba(184, 216, 142, 0.6);
 }
 
 /* ================================

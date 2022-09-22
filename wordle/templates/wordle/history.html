@@ -6,26 +6,63 @@
 
 {% block content %}
   <main>
-    <div class="main-page-gallery">
-      {% if not user.is_authenticated %}
-        <p>Log in or register a new account to track your wordle history!</p>
-      {% endif %}
-      {% if user.is_authenticated %}
-        <div class="pagination padded">
-          {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="unstyle-link">&#x25C0 &nbsp</a>
-          {% endif %}
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-          {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="unstyle-link">&nbsp &#x25B6</a>
-          {% endif %}
-        </div>
+    {% if not user.is_authenticated %}
+      <div class="generic-bold-message">
+        Log in or register a new account to track your wordle history!
+      </div>
+    {% endif %}
+    <a href="{% url 'new_game' %}">
+      <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022244672220975154/new_game_button.png" class="new-game-button">
+    </a>
+    {% if user.is_authenticated %}
+      <h1 class="greeting">Welcome {{user|upper}}!</h1>
+      <h4 class="greeting">Your past games</h4>
+      <div class="history-gallery">
         {% for item in wordlehistory_list %}
-            <div>
-              {{item}}{{item.cleared}}---{{item.difficulty}}
+
+          <div class="gallery-card">
+            {% if item.difficulty == "Very easy" %}
+              <div class="difficulty-bar" style="background-color: rgb(117, 182, 57);"></div>
+            {% elif item.difficulty == "Easy" %}
+              <div class="difficulty-bar" style="background-color: rgb(155, 182, 57);"></div>
+            {% elif item.difficulty == "Moderate" %}
+              <div class="difficulty-bar" style="background-color: rgb(170, 147, 43);"></div>
+            {% elif item.difficulty == "Difficult" %}
+              <div class="difficulty-bar" style="background-color: rgb(182, 124, 57);"></div>
+            {% elif item.difficulty == "Very difficult" %}
+              <div class="difficulty-bar" style="background-color: rgb(182, 57, 57);"></div>
+            {% else %}
+              <div class="difficulty-bar" style="background-color: gray"></div>
+            {% endif %}
+
+            <div class="info">
+              {{item.word|upper}}
+              <div class="difficulty">
+                {{item.difficulty}}
+              </div>
             </div>
+
+            <div class="clear-status">
+              <div class="clear-status-grid">
+                {% if item.cleared %}
+                  <div class="desc">
+                    Cleared in<br>
+                    {{item.guesses_needed}} tries
+                  </div>
+                  <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022282651480109066/check-mark-circle-icon.png">
+                {% else %}
+                  <div class="desc">
+                    Failed with<br>
+                    {{item.guesses_needed}} tries
+                  </div>
+                  <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022288144621633606/x-mark-circle-icon.png">
+                {% endif %}
+              </div>
+            </div>
+
+          </div>
         {% endfor %}
-      {% endif %}
-    </div>
+      </div>
+    {% endif %}
   </main>
 {% endblock content %}

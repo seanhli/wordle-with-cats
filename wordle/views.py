@@ -26,31 +26,45 @@ class GameBoard(DetailView):
     tried = []
     attempts = 0
     error_message = ""
+    failed = ""
     current_board = []
-    available_letters = list(string.ascii_uppercase)
+    available_letters = []
+    valid_letters = []
 
     def post(self, request, **kwargs):
         user_guess = request.POST.get("word_guess").upper()
         self.object = self.get_object()
         gen = word_generator()
 
-        print("diagnose: ", self.attempts, self.current_board, self.object.id)
+        print("diagnose: ", self.attempts, self.current_board, self.object.id, self.available_letters)
 
         if not self.current_board:
             self.tried.clear()
+            self.valid_letters.clear()
+            self.available_letters.clear()
+            for i in list(string.ascii_uppercase):
+                self.available_letters.append(i)
         elif self.current_board[0] != self.object.id:
             self.tried.clear()
+            self.valid_letters.clear()
+            self.available_letters.clear()
+            for i in list(string.ascii_uppercase):
+                self.available_letters.append(i)
             self.current_board.clear()
 
         if len(user_guess) != self.object.length:
             self.error_message = "Invalid length. Please try again"
         elif not gen.check_word(user_guess):
             self.error_message = "Invalid word. Please try again"
-        else:
-            self.tried.append(gen.check_answer(user_guess,self.object.word.upper()))
+        elif len(self.tried) < self.object.tries and not self.object.cleared:
+            checker = gen.check_answer(user_guess,self.object.word.upper())
+            self.tried.append(checker)
             for letter in user_guess:
                 if letter in self.available_letters:
                     self.available_letters.remove(letter)
+            for pair in checker:
+                if pair[1] in ["rgb(65, 126, 52)","rgb(190, 163, 42)"] and pair[0] not in self.valid_letters:
+                    self.valid_letters.append(pair[0])
         self.attempts = len(self.tried)
 
         if not self.current_board:
@@ -61,6 +75,9 @@ class GameBoard(DetailView):
             if self.object.guesses_needed == 0:
                 self.object.guesses_needed = self.attempts
             self.object.save()
+
+        if self.attempts >= self.object.tries and not self.object.cleared:
+            self.failed = "f"
 
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
@@ -73,6 +90,10 @@ class GameBoard(DetailView):
 
         if self.attempts == 0:
             self.tried.clear()
+            self.valid_letters.clear()
+            self.available_letters.clear()
+            for i in list(string.ascii_uppercase):
+                self.available_letters.append(i)
 
         board = self.tried.copy()
         for i in range(self.attempts,self.object.tries,1):
@@ -82,8 +103,10 @@ class GameBoard(DetailView):
         context["tried"] = board
 
         context["available_letters"] = self.available_letters
+        context["valid_letters"] = self.valid_letters
         context["error_message"] = self.error_message
-        print(context)
+        context["failed"] = self.failed
+        # print(context)
         return context
 
 

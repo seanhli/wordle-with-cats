@@ -5,8 +5,7 @@
 {% endblock page_name %}
 
 {% block content %}
-    <main>
-        {{wordlehistory.difficulty}}
+    <main class="game-board">
         {% for guess in tried %}
             <div class="letter-list">
                 {% for letter in guess %}
@@ -14,27 +13,41 @@
                 {% endfor %}
             </div>
         {% endfor %}
-        {% if not wordlehistory.cleared %}
-            <form method="POST" autocomplete="OFF">
-                {% csrf_token %}
-                <input name="word_guess" type="text" autofocus>
-                <button>Guess</button>
-            </form>
-            {% if error_message|length > 0 %}
-                {{error_message}}
-            {% endif %}
-        <div class="avail-letter-list">
-            <div>
-                Unused letters
+        {% if not wordlehistory.cleared and failed != "f" %}
+            <div class="form-container">
+                <form method="POST" autocomplete="OFF" class="form-text">
+                    {% csrf_token %}
+                    <input name="word_guess" type="text" autofocus>
+                    <button class="button">Guess</button>
+                </form>
             </div>
-            {% for letter in available_letters %}
-                <div class="avail-letter-card">
-                    {{letter}}
+            {% if error_message|length > 0 %}
+                <p class="greeting">{{error_message}}</p>
+            {% endif %}
+            <div class="avail-letter-list">
+                <div>
+                    Found letters
                 </div>
-            {% endfor %}
-        </div>
-        {% else %}
-            <p>Congrats!</p>
+                {% for letter in valid_letters %}
+                    <div class="avail-letter-card">
+                        {{letter}}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="avail-letter-list">
+                <div>
+                    Unused letters
+                </div>
+                {% for letter in available_letters %}
+                    <div class="avail-letter-card">
+                        {{letter}}
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif wordlehistory.cleared %}
+            <a href="{% url 'new_game' %}">
+                <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022244672220975154/new_game_button.png" class="new-game-button">
+            </a>
             <div class="container">
                 <div class="confetti">
                 </div>
@@ -184,6 +197,12 @@
                     </div>
                 </div>
             </div>
+        {% else %}
+            <p>Better luck next time!</p>
+            <p>The word was: {{wordlehistory.word|upper}}</p>
+            <a href="{% url 'new_game' %}">
+                <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022244672220975154/new_game_button.png" class="new-game-button">
+            </a>
         {% endif %}
     </main>
 {% endblock content %}
