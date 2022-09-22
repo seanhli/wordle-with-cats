@@ -6,13 +6,13 @@
 
 {% block content %}
   <main>
-    <div >
-        <form method="POST">
+    <div class="login-container">
+        <form method="POST" class="form-text">
             {% csrf_token %}
             {{form.as_p}}
-            <button>Log in</button>
+            <button class="button">Log in</button>
+            <a href="{% url 'signup' %}">Register new account</a>
         </form>
-        <a href="{% url 'signup' %}">Register a new account</a>
     </div>
   </main>
 {% endblock content %}

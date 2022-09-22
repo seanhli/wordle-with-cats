@@ -45,6 +45,7 @@
                 {% endfor %}
             </div>
         {% elif wordlehistory.cleared %}
+            <h2 class="greeting">Congratulations!!</h2>
             <a href="{% url 'new_game' %}">
                 <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022244672220975154/new_game_button.png" class="new-game-button">
             </a>

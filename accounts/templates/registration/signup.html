@@ -6,12 +6,12 @@
 
 {% block content %}
   <main>
-    <div >
-        <form method="POST">
-            {% csrf_token %}
-            {{registration_form.as_p}}
-            <button>Create new account</button>
-        </form>
+    <div class="registration-container">
+      <form method="POST" class="form-text">
+        {% csrf_token %}
+        {{registration_form.as_div}}
+        <button class="button">Create new account</button>
+      </form>
     </div>
   </main>
 {% endblock content %}

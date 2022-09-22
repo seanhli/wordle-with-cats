@@ -656,6 +656,59 @@ body.light .generic-bold-message {
   margin-bottom: 10px;
 }
 
+.login-container {
+  padding: 20px;
+  background-color: rgba(185, 151, 77, 0.4);
+  width: 275px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+body.light .login-container {
+  background-color: rgba(173, 196, 160, 0.4);;
+}
+
+.login-container a {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: inherit;
+  background-color: rgb(199, 134, 37);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: white;
+  padding: 4px;
+  text-transform: uppercase;
+}
+
+.login-container a:hover {
+  background-color: white;
+  border-color: rgb(199, 134, 37);
+  color: rgb(199, 134, 37);
+}
+
+body.light .login-container a {
+  background-color: rgb(63, 92, 17);
+}
+
+body.light .login-container a:hover {
+  background-color: white;
+  border-color: rgb(101, 156, 11);
+  color: rgb(101, 156, 11);
+}
+
+.registration-container {
+  padding: 20px;
+  background-color: rgba(185, 151, 77, 0.4);
+  width: 620px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+body.light .registration-container {
+  background-color: rgba(173, 196, 160, 0.4);;
+}
+
 .form-text {
   color: #fff;
   font-weight: 600;
