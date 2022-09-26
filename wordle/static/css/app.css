@@ -563,6 +563,24 @@ body.light .link-to-page {
   left: -400px;
 }
 
+.inner-cat {
+  width: 256px;
+  height: 113px;
+  background-image: url("https://cdn.discordapp.com/attachments/1021875289644613705/1021875350529130629/Longcat.webp");
+}
+
+.inner-cat:hover {
+  width: 306px;
+  height: 128px;
+  background-image: url("https://cdn.discordapp.com/attachments/1021875289644613705/1024017527786962974/ShockedLongcat.webp");
+  animation: hiding 2s ease;
+}
+
+@keyframes hiding {
+  0% { transform: translateX(20px) }
+  100% { transform: translateX(-200px) }
+}
+
 body.light .nav__cat {
   -webkit-filter: grayscale(1) invert(1);
   filter: grayscale(0.5) invert(1);

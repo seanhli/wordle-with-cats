@@ -3,7 +3,6 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from wordle.word_generator import word_generator
 from wordle.models import WordleHistory
@@ -36,7 +35,7 @@ class GameBoard(DetailView):
         self.object = self.get_object()
         gen = word_generator()
 
-        print("diagnose: ", self.attempts, self.current_board, self.object.id, self.available_letters)
+        # print("diagnose: ", self.attempts, self.current_board, self.object.id, self.available_letters)
 
         if not self.current_board:
             self.tried.clear()
