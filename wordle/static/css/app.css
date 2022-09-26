@@ -577,7 +577,7 @@ body.light .link-to-page {
 }
 
 @keyframes hiding {
-  0% { transform: translateX(20px) }
+  30% { transform: translateX(20px) }
   100% { transform: translateX(-200px) }
 }
 
