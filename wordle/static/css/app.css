@@ -586,6 +586,26 @@ body.light .nav__cat {
   filter: grayscale(0.5) invert(1);
 }
 
+.cat-paw {
+  position: fixed;
+  margin: auto;
+  z-index: 10;
+  width: 512px;
+  height: 512px;
+  transform: scale(150%) rotate(-90deg) translateX(-1000px);
+  background-repeat: no-repeat;
+  background-image: url("https://cdn.discordapp.com/attachments/1021875289644613705/1024069227277209610/cat-paw.png");
+  animation: swipe 2s ease;
+}
+
+@keyframes swipe {
+  0% { transform: scale(400%) rotate(-90deg) translateX(50px) translateY(300px)}
+  15% { transform: scale(150%) rotate(-90deg) translateX(50px) }
+  50% { transform: scale(150%) rotate(-90deg) translateX(-150px)}
+  100% { transform: scale(150%) rotate(-90deg) translateX(-1000px)}
+}
+
+
 .swing__cat {
   -webkit-filter: grayscale(0.3);
   filter: grayscale(0.3);
@@ -941,6 +961,47 @@ body.light .clear-status-grid img {
 
 .letter-list {
   height: 70px;
+  animation: fadein 1.5s linear;
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  42% { opacity: 0; }
+  43% { opacity: 1; }
+}
+
+.letter-list:nth-child(0) {
+  animation-duration: 0.7s;
+}
+.letter-list:nth-child(1) {
+  animation-duration: 0.7s;
+}
+.letter-list:nth-child(2) {
+  animation-duration: 0.7s;
+}
+.letter-list:nth-child(3) {
+  animation-duration: 0.7s;
+}
+.letter-list:nth-child(4) {
+  animation-duration: 0.9s;
+}
+.letter-list:nth-child(5) {
+  animation-duration: 1.1s;
+}
+.letter-list:nth-child(6) {
+  animation-duration: 1.3s;
+}
+.letter-list:nth-child(7) {
+  animation-duration: 1.4s;
+}
+.letter-list:nth-child(8) {
+  animation-duration: 1.5s;
+}
+.letter-list:nth-child(9) {
+  animation-duration: 1.6s;
+}
+.letter-list:nth-child(10) {
+  animation-duration: 1.7s;
 }
 
 .letter-card {
