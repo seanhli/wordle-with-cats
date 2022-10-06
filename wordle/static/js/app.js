@@ -45,4 +45,15 @@
         }
     });
 
+    //music player: autoplay on click (link to an audio html tag with id = player)
+
+    // document.addEventListener('click', musicPlay);
+    // function musicPlay() {
+    //     var audio = document.getElementById("player");
+    //     audio.play();
+    //     audio.volume = 0.1;
+    //     document.removeEventListener('click', musicPlay);
+    // }
+
+
 })(jQuery);

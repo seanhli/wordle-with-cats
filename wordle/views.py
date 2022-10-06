@@ -85,6 +85,7 @@ class GameBoard(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.object = self.get_object()
+        gen = word_generator()
         context["attempts"] = self.attempts
 
         if self.attempts == 0:
@@ -100,7 +101,7 @@ class GameBoard(DetailView):
             for k in range(self.object.length):
                 board[i].append("")
         context["tried"] = board
-
+        context["definition"] = gen.define_word(self.object.word)
         context["available_letters"] = self.available_letters
         context["valid_letters"] = self.valid_letters
         context["error_message"] = self.error_message

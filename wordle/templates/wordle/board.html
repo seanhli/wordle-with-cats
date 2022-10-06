@@ -47,6 +47,16 @@
             </div>
         {% elif wordlehistory.cleared %}
             <h2 class="greeting">Congratulations!!</h2>
+            <div class="definitions">
+                Definitions:
+                {% for item in definition%}
+                    {% if forloop.counter0|divisibleby:2 %}
+                        <p>{{item}}</p>
+                    {% else %}
+                        <p style="margin-left: 25px; font-weight:300">{{item}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
             <a href="{% url 'new_game' %}">
                 <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022244672220975154/new_game_button.png" class="new-game-button">
             </a>
@@ -200,11 +210,24 @@
                 </div>
             </div>
         {% else %}
-            <p>Better luck next time!</p>
-            <p>The word was: {{wordlehistory.word|upper}}</p>
+            <div class="definitions">
+                <p>Better luck next time!</p>
+                <p>The word was: {{wordlehistory.word|upper}}</p>
+                Definitions:
+                {% for item in definition%}
+                    {% if forloop.counter0|divisibleby:2 %}
+                        <p>{{item}}</p>
+                    {% else %}
+                        <p style="margin-left: 25px; font-weight:300">{{item}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
             <a href="{% url 'new_game' %}">
                 <img src="https://cdn.discordapp.com/attachments/1021875289644613705/1022244672220975154/new_game_button.png" class="new-game-button">
             </a>
         {% endif %}
+        {% comment %} <audio id="player" loop="true">
+            <source src="https://cdn.discordapp.com/attachments/1021875289644613705/1024159110486302830/wizzy.mp3">
+        </audio> {% endcomment %}
     </main>
 {% endblock content %}

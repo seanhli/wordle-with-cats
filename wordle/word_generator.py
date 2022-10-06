@@ -4,6 +4,7 @@
 #   check if word is valid
 
 import requests
+import json
 from collections import defaultdict
 from random import randint
 
@@ -20,6 +21,20 @@ class word_generator:
             return True
         else:
             return False
+
+    def define_word(self, word: str):
+        url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word
+        r = requests.get(url)
+        if r.status_code == 200:
+            content = json.loads(r.content)
+            output = []
+            for i in content[0]["meanings"]:
+                output.append(f'As a {i["partOfSpeech"]}:')
+                output.append(f'{i["definitions"][0]["definition"]}')
+            return output
+        else:
+            return ["Word does not exist"]
+
 
     def check_answer(self, guess: str, answer: str):
         output = []

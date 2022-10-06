@@ -573,7 +573,7 @@ body.light .link-to-page {
   width: 306px;
   height: 128px;
   background-image: url("https://cdn.discordapp.com/attachments/1021875289644613705/1024017527786962974/ShockedLongcat.webp");
-  animation: hiding 2s ease;
+  animation: hiding 1.75s ease;
 }
 
 @keyframes hiding {
@@ -1052,6 +1052,20 @@ body.light .letter-card {
 
 body.light .avail-letter-card {
   background-color: rgba(184, 216, 142, 0.6);
+}
+
+.definitions {
+  color: #fff;
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  padding: 4px;
+  padding-left: 10px;
+}
+
+body.light .definitions {
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* ================================
